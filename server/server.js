@@ -20,18 +20,18 @@ mongoose
     console.log("MongoDB connection error:", error);
   });
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Server is running!");
 });
 
-app.get("/students", async (req, res) => {
+app.get("/api/students", async (req, res) => {
   
     const students = await Student.find();
     res.json(students);
   
 });
 
-app.post("/students", async (req, res) => {
+app.post("/api/students", async (req, res) => {
  
     const newStudent = new Student({
       name: req.body.name.trim(),
@@ -44,7 +44,7 @@ app.post("/students", async (req, res) => {
   
 });
 
-app.put("/students/:id",  async (req, res) => {
+app.put("/api/students/:id", async (req, res) => {
   
     const updatedStudent = await Student.findByIdAndUpdate(
       req.params.id,
@@ -64,7 +64,7 @@ app.put("/students/:id",  async (req, res) => {
   
 });
 
-app.delete("/students/:id", async (req, res) => {
+app.delete("/api/students/:id", async (req, res) => {
   
     const deletedStudent = await Student.findByIdAndDelete(req.params.id);
 
