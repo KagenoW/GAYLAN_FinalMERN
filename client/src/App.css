@@ -1,0 +1,183 @@
+/* Extra colors for success / delete states (light mode, then dark mode) */
+:root {
+  --success: #1a7f37;
+  --success-bg: rgba(26, 127, 55, 0.1);
+  --danger: #cf222e;
+  --danger-bg: rgba(207, 34, 46, 0.08);
+  --danger-border: rgba(207, 34, 46, 0.45);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --success: #4ac26b;
+    --success-bg: rgba(74, 194, 107, 0.15);
+    --danger: #ff7b72;
+    --danger-bg: rgba(255, 123, 114, 0.12);
+    --danger-border: rgba(255, 123, 114, 0.45);
+  }
+}
+
+/* Page wrapper: left-aligned content inside the centered #root column */
+.app {
+  padding: 0 32px 48px;
+  text-align: left;
+}
+
+.app h1 {
+  text-align: center;
+  line-height: 1.1;
+}
+
+/* Two columns: form on the left, student list on the right */
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* Add / Edit form card (stays visible while scrolling the list) */
+.student-form {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.student-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+  color: var(--text-h);
+}
+
+.student-form input {
+  font: inherit;
+  font-size: 16px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.student-form input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.form-buttons,
+.card-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* Buttons: default = outlined, .primary = filled, .danger = red */
+.app button {
+  font: inherit;
+  font-size: 15px;
+  padding: 8px 16px;
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.app button:hover {
+  border-color: var(--accent);
+}
+
+.app button.primary {
+  flex: 1;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.app button.danger {
+  border-color: var(--danger-border);
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.app button.danger:hover {
+  border-color: var(--danger);
+}
+
+/* Student list: responsive grid of cards */
+.student-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.student-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.student-card .student-name {
+  color: var(--text-h);
+  font-weight: 600;
+}
+
+/* Highlights the card that is currently loaded in the form */
+.student-card.editing {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+/* margin-top: auto keeps the buttons at the bottom so they line up across cards */
+.card-buttons {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/* Success / error message */
+.notice {
+  margin: 0 0 24px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.notice.success {
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+.notice.error {
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.empty {
+  margin-top: 16px;
+}
+
+/* Small screens: stack the form above the list */
+@media (max-width: 800px) {
+  .app {
+    padding: 0 16px 32px;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .student-form {
+    position: static;
+  }
+}
